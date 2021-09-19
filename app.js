@@ -1,5 +1,6 @@
 const express = require('express');
 require('dotenv').config();
+const db = require("./config/db");
 const path = require("path");
 const http = require("http");
 const bodyParser = require("body-parser");
@@ -27,6 +28,10 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use('/css', express.static(__dirname + 'public/css'));
 app.use('/js', express.static(__dirname + 'public/js'));
 app.use('/images', express.static(__dirname + 'public/images'));
+
+app.get("/", (req, res) =>{
+    res.render("index");
+})
 
 const PORT = process.env.PORT || 7000;
 server.listen(PORT, console.log(`Server started on ${PORT}`));
