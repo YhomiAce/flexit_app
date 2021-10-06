@@ -2,7 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('departments', {
+    await queryInterface.createTable('customers', {
       id: {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV1,
@@ -10,8 +10,28 @@ module.exports = {
       },
       name: {
         allowNull: true,
+        type: Sequelize.STRING
+      },
+      phone: {
         type: Sequelize.STRING,
-        unique: true
+        allownull: true
+      },
+      email: {
+        type: Sequelize.STRING,
+        allownull: true
+      },
+      purpose: {
+        type: Sequelize.TEXT,
+        allownull: true
+      },
+      status: {
+        type: Sequelize.ENUM("waiting", "processing", "checkout"),
+        defaultValue: "waiting",
+        allownull: false
+      },
+      queueNo: {
+        type: Sequelize.STRING,
+        allownull: true
       },
       createdAt: {
         allowNull: false,
@@ -29,6 +49,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('departments');
+    await queryInterface.dropTable('customers');
   }
 };

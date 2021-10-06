@@ -9,9 +9,12 @@ const Department = sequelize.define("departments", {
     },
     name: {
         type: Sequelize.STRING,
-        allownull: false
+        allownull: false,
+        unique: true
     }
       
 },{
     paranoid: true
 });
+
+module.exports = Department

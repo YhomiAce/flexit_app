@@ -1,0 +1,77 @@
+<%- include("./partials/navbar") %> 
+<%- include("./partials/sidebar") %> 
+
+<div class="main-panel">
+  <%- include("./partials/alerts") %> 
+    <div class="content-wrapper">
+      <div class="row">
+        <div class="col-md-12 grid-margin">
+            <div class="card border-primary">
+                <div class="card-header">
+                    <h4 class="text-center text-primary float-left">Department List</h4>
+                    <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#exampleModal">
+                      Add New Department
+                    </button>
+                </div>
+                <div class="card-body">
+                  
+                  
+                  <!-- Modal -->
+                  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="text-center">Add New Department</h5>  
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                               
+                          <form action="/add-department" method="POST">
+                              <div class="form-group">
+                                  <label for="">Name of Department</label>
+                                  <input type="text" name="name" class="form-control">
+                              </div>
+                              <button type="submit" class="btn btn-primary">Add Department</button>
+                          </form>
+                        </div>
+                        
+                      </div>
+                    </div>
+                  </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                          <thead>
+                            <tr>
+                              <th>ID</th>
+                              <th>Name</th>
+                              <th>Date Added</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                              <% for (let i = 0; i < departments.length; i++ ) { %> 
+                              <tr>
+                                <td><%= i+1 %> </td>
+                                <td> <%= departments[i].name %>  </td>
+                                <td><%= moment(departments[i].createdAt).format("DD-MM-YYYY")  %> </td>
+                              </tr>
+                              <% } %> 
+                            
+                            
+                          </tbody>
+                        </table>
+                      </div>
+                </div>
+            </div>
+        </div>
+      </div>
+      
+    </div>
+</div>
+<%- include("./partials/footer") %> 
+<script>
+  $('table').DataTable({
+  })
+</script>
+
